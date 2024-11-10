@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
 		borderRadius: 16,
 		borderWidth: 1,
 		padding: 10,
+		borderColor: '#A3A3A3',
 	},
 	name: {
 		fontWeight: '600',

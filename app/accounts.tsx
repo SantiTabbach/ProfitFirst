@@ -1,15 +1,23 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import AccountList from '@/components/AccountList';
+import Form from '@/components/Form';
 
 const AccountsScreen = () => {
 	return (
-		<View style={{ gap: 16, paddingHorizontal: 16 }}>
+		<View style={styles.container}>
 			<AccountList />
+			<Form />
 		</View>
 	);
 };
 
 export default AccountsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		gap: 16,
+		padding: 16,
+	},
+});
