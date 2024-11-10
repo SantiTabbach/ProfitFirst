@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import AccountList from '@/components/AccountList';
 
 const AccountsScreen = () => {
-  return (
-    <View>
-      <Text>AccountsScreen</Text>
-    </View>
-  )
-}
+	return (
+		<View style={{ gap: 16, paddingHorizontal: 16 }}>
+			<AccountList />
+		</View>
+	);
+};
 
-export default AccountsScreen
+export default AccountsScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
