@@ -1,12 +1,21 @@
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 import React from 'react';
 import useCreateAccount, { initalState } from '@/hooks/useCreateAccount';
+import { accountsCollection, db } from '@/db/index.native';
+import { Account } from '@/model/Account';
 
 const Form = () => {
 	const { formValues, setFormValues } = useCreateAccount();
 
-	const createAccount = () => {
-		console.log(formValues);
+	const createAccount = async () => {
+		await db.write(async () => {
+			const account = await accountsCollection.create((account) => {
+				account.name = formValues.name;
+				account.cap = +formValues.cap;
+				account.tap = +formValues.tap;
+			});
+			console.log(account);
+		});
 		setFormValues(initalState);
 	};
 
@@ -14,6 +23,12 @@ const Form = () => {
 		setFormValues((prev) => {
 			return { ...prev, [key]: t };
 		});
+	};
+
+	const onRead = async () => {
+		const accounts = await accountsCollection.query().fetch();
+
+		console.log(accounts[2].name);
 	};
 
 	return (
@@ -40,6 +55,7 @@ const Form = () => {
 			/>
 
 			<Button title="Add account" onPress={createAccount} />
+			<Button title="Read" onPress={onRead} />
 		</View>
 	);
 };
