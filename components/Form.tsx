@@ -8,12 +8,11 @@ const Form = () => {
 
 	const createAccount = async () => {
 		await db.write(async () => {
-			const account = await accountsCollection.create((account) => {
+			await accountsCollection.create((account) => {
 				account.name = formValues.name;
 				account.cap = Number.parseFloat(formValues.cap);
 				account.tap = Number.parseFloat(formValues.tap);
 			});
-			console.log(account);
 		});
 		setFormValues(initalState);
 	};
