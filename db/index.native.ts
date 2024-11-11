@@ -8,7 +8,7 @@ import { Allocation } from '@/model/Allocation';
 
 const adapter = new SQLiteAdapter({
 	schema,
-	// migrations,
+	migrations,
 	jsi: true,
 	onSetUpError: (error) => {},
 });

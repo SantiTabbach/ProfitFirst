@@ -2,7 +2,7 @@ import { allocationsCollection, db } from '@/db/index.native';
 import { useState } from 'react';
 
 const useCreateAllocation = () => {
-	const [income, setIncome] = useState('');
+	const [income, setIncome] = useState('0');
 
 	const createAllocation = async () => {
 		await db.write(async () => {
@@ -10,7 +10,7 @@ const useCreateAllocation = () => {
 				allocation.income = Number.parseFloat(income);
 			});
 		});
-		setIncome('');
+		setIncome('0');
 	};
 
 	return { income, setIncome, createAllocation };
