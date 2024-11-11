@@ -25,6 +25,18 @@ const Form = () => {
 		});
 	};
 
+	const testChange = async () => {
+		await db.write(async () => {
+			const accounts = await accountsCollection.query().fetch();
+
+			const account = accounts[0];
+
+			account.update((u) => {
+				u.name = 'Test 1';
+			});
+		});
+	};
+
 	return (
 		<View style={styles.container}>
 			<TextInput
@@ -49,6 +61,7 @@ const Form = () => {
 			/>
 
 			<Button title="Add account" onPress={createAccount} />
+			<Button title="Test change" onPress={testChange} />
 		</View>
 	);
 };

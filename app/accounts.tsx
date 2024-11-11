@@ -6,7 +6,9 @@ import Form from '@/components/Form';
 const AccountsScreen = () => {
 	return (
 		<View style={styles.container}>
-			<AccountList />
+			<View style={{ flex: 1 }}>
+				<AccountList />
+			</View>
 			<Form />
 		</View>
 	);

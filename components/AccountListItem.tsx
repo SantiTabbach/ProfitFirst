@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Account } from '@/model/Account';
+import { withObservables } from '@nozbe/watermelondb/react';
 
 interface Props {
 	account: Account;
@@ -20,7 +21,11 @@ const AccountListItem = ({ account }: Props) => {
 	);
 };
 
-export default AccountListItem;
+const enhance = withObservables(['account'], ({ account }: Props) => ({
+	account,
+}));
+
+export default enhance(AccountListItem);
 
 const styles = StyleSheet.create({
 	container: {
