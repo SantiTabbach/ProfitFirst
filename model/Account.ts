@@ -4,7 +4,7 @@ import { field, text } from '@nozbe/watermelondb/decorators';
 export class Account extends Model {
 	static table = 'accounts';
 
-	@text('name') name: string | undefined;
-	@field('cap') cap: number | undefined;
-	@field('tap') tap: number | undefined;
+	@text('name') name!: string;
+	@field('cap') cap!: number;
+	@field('tap') tap!: number;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import { Account } from '@/model/Account';
 import { withObservables } from '@nozbe/watermelondb/react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { accountsCollection, db } from '@/db/index.native';
+import { db } from '@/db/index.native';
 
 interface Props {
 	account: Account;

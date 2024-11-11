@@ -5,5 +5,5 @@ export class Allocation extends Model {
 	static table = 'allocations';
 
 	@text('income') income!: number;
-	@readonly @date('created_at') createdAt!: number;
+	@readonly @date('created_at') createdAt!: Date;
 }

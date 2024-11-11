@@ -1,27 +1,9 @@
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 import React from 'react';
-import useCreateAccount, { initalState } from '@/hooks/useCreateAccount';
-import { accountsCollection, db } from '@/db/index.native';
+import useCreateAccount from '@/hooks/useCreateAccount';
 
 const Form = () => {
-	const { formValues, setFormValues } = useCreateAccount();
-
-	const createAccount = async () => {
-		await db.write(async () => {
-			await accountsCollection.create((account) => {
-				account.name = formValues.name;
-				account.cap = Number.parseFloat(formValues.cap);
-				account.tap = Number.parseFloat(formValues.tap);
-			});
-		});
-		setFormValues(initalState);
-	};
-
-	const handleInputChange = (t: string, key: 'name' | 'cap' | 'tap') => {
-		setFormValues((prev) => {
-			return { ...prev, [key]: t };
-		});
-	};
+	const { formValues, createAccount, handleInputChange } = useCreateAccount();
 
 	return (
 		<View style={styles.container}>
