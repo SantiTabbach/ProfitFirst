@@ -1,8 +1,7 @@
 import { Button, StyleSheet, TextInput, View } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import useCreateAccount, { initalState } from '@/hooks/useCreateAccount';
 import { accountsCollection, db } from '@/db/index.native';
-import { Account } from '@/model/Account';
 
 const Form = () => {
 	const { formValues, setFormValues } = useCreateAccount();
@@ -22,18 +21,6 @@ const Form = () => {
 	const handleInputChange = (t: string, key: 'name' | 'cap' | 'tap') => {
 		setFormValues((prev) => {
 			return { ...prev, [key]: t };
-		});
-	};
-
-	const testChange = async () => {
-		await db.write(async () => {
-			const accounts = await accountsCollection.query().fetch();
-
-			const account = accounts[0];
-
-			account.update((u) => {
-				u.name = 'Test 1';
-			});
 		});
 	};
 
@@ -60,8 +47,11 @@ const Form = () => {
 				placeholder="TAP %"
 			/>
 
-			<Button title="Add account" onPress={createAccount} />
-			<Button title="Test change" onPress={testChange} />
+			<Button
+				title="Add account"
+				onPress={createAccount}
+				disabled={!formValues.name || !formValues.cap || !formValues.tap}
+			/>
 		</View>
 	);
 };
@@ -75,9 +65,9 @@ const styles = StyleSheet.create({
 		gap: 16,
 	},
 	textInput: {
-		flex: 1,
+		height: 40,
 		backgroundColor: 'white',
-		borderRadius: 16,
+		borderRadius: 8,
 		paddingHorizontal: 10,
 	},
 });

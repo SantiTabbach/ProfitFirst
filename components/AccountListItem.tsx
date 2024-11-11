@@ -2,6 +2,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Account } from '@/model/Account';
 import { withObservables } from '@nozbe/watermelondb/react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { accountsCollection, db } from '@/db/index.native';
 
 interface Props {
 	account: Account;
@@ -10,12 +12,24 @@ interface Props {
 const AccountListItem = ({ account }: Props) => {
 	const { name, cap, tap } = account;
 
+	const handleDelete = async () => {
+		await db.write(async () => {
+			account.markAsDeleted();
+		});
+	};
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.name}>{name}</Text>
 			<View style={styles.allocationStatContainer}>
 				<Stat value={cap} label="CAP" />
 				<Stat value={tap} label="TAP" />
+				<MaterialCommunityIcons
+					onPress={handleDelete}
+					name="trash-can"
+					size={24}
+					color="#ff5b5b"
+				/>
 			</View>
 		</View>
 	);
@@ -45,6 +59,7 @@ const styles = StyleSheet.create({
 	allocationStatContainer: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'center',
 		gap: 16,
 	},
 	allocationStat: {
