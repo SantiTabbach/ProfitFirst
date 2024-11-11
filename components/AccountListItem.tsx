@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { Account } from '@/model/Account';
 
 interface Props {
-	name: string;
-	cap: number;
-	tap: number;
+	account: Account;
 }
 
-const AccountListItem = ({ name, cap, tap }: Props) => {
+const AccountListItem = ({ account }: Props) => {
+	const { name, cap, tap } = account;
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.name}>{name}</Text>
@@ -51,7 +52,13 @@ const styles = StyleSheet.create({
 	},
 });
 
-const Stat = ({ value, label }: { value: number; label: string }) => (
+const Stat = ({
+	value,
+	label,
+}: {
+	value: number | undefined;
+	label: string;
+}) => (
 	<View style={styles.allocationStat}>
 		<Text>{value}%</Text>
 		<Text style={styles.statLabel}>{label}</Text>

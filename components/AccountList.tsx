@@ -1,18 +1,27 @@
 import { FlatList, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AccountListItem from './AccountListItem';
-
-const mockData = [
-	{ name: 'Profit', cap: 20, tap: 20 },
-	{ name: 'Profit', cap: 20, tap: 20 },
-];
+import { accountsCollection } from '@/db/index.native';
+import { Account } from '@/model/Account';
 
 const AccountList = () => {
+	const [accounts, setAccounts] = useState<Account[]>([]);
+
+	useEffect(() => {
+		const fetchAccounts = async () => {
+			const storedAccounts = await accountsCollection.query().fetch();
+
+			setAccounts(storedAccounts);
+		};
+
+		fetchAccounts();
+	}, []);
+
 	return (
 		<FlatList
 			contentContainerStyle={{ gap: 16 }}
-			data={mockData}
-			renderItem={({ item }) => <AccountListItem {...item} />}
+			data={accounts}
+			renderItem={({ item }) => <AccountListItem account={item} />}
 		/>
 	);
 };
