@@ -3,7 +3,6 @@ import React from 'react';
 import { Account } from '@/model/Account';
 import { withObservables } from '@nozbe/watermelondb/react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { db } from '@/db/index.native';
 
 interface Props {
 	account: Account;
@@ -13,9 +12,7 @@ const AccountListItem = ({ account }: Props) => {
 	const { name, cap, tap } = account;
 
 	const handleDelete = async () => {
-		await db.write(async () => {
-			account.markAsDeleted();
-		});
+		await account.delete();
 	};
 
 	return (

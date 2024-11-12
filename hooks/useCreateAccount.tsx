@@ -1,4 +1,6 @@
-import { accountsCollection, db } from '@/db/index.native';
+import { db } from '@/db/index.native';
+import { Account } from '@/model/Account';
+import { RawRecord } from '@nozbe/watermelondb';
 import { useState } from 'react';
 
 interface FormValues {
@@ -13,17 +15,18 @@ export const initalState = {
 	tap: '',
 };
 
+const a = new Account(db.get('accounts'), {} as RawRecord);
+
 const useCreateAccount = () => {
 	const [formValues, setFormValues] = useState<FormValues>(initalState);
 
 	const createAccount = async () => {
-		await db.write(async () => {
-			await accountsCollection.create((account) => {
-				account.name = formValues.name;
-				account.cap = Number.parseFloat(formValues.cap);
-				account.tap = Number.parseFloat(formValues.tap);
-			});
+		a.create({
+			name: formValues.name,
+			cap: Number.parseFloat(formValues.cap),
+			tap: Number.parseFloat(formValues.tap),
 		});
+
 		setFormValues(initalState);
 	};
 
