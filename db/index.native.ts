@@ -5,6 +5,7 @@ import schema from './model/schema';
 import migrations from './model/migrations';
 import { Account } from '@/model/Account';
 import { Allocation } from '@/model/Allocation';
+import { AccountAllocation } from '@/model/AccountAllocation';
 
 const adapter = new SQLiteAdapter({
 	schema,
@@ -15,8 +16,11 @@ const adapter = new SQLiteAdapter({
 
 export const db = new Database({
 	adapter,
-	modelClasses: [Account, Allocation],
+	modelClasses: [Account, Allocation, AccountAllocation],
 });
 
 export const accountsCollection = db.get<Account>('accounts');
 export const allocationsCollection = db.get<Allocation>('allocations');
+export const accountAllocationCollection = db.get<AccountAllocation>(
+	'account_allocations'
+);

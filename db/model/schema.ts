@@ -24,5 +24,21 @@ export default appSchema({
 				},
 			],
 		}),
+		tableSchema({
+			name: 'account_allocations',
+			columns: [
+				{
+					name: 'created_at',
+					type: 'number',
+				},
+				{
+					name: 'account_id',
+					type: 'string',
+				},
+				{ name: 'allocation_id', type: 'string' },
+				{ name: 'amount', type: 'number' },
+				{ name: 'cap', type: 'number' },
+			],
+		}),
 	],
 });
