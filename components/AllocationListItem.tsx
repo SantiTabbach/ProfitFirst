@@ -22,6 +22,7 @@ const AllocationListItem = ({ allocation }: Props) => {
 
 const enhance = withObservables(['allocation'], ({ allocation }: Props) => ({
 	allocation,
+	// accountAllocation: allocation
 }));
 
 export default enhance(AllocationListItem);

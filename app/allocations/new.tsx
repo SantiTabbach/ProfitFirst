@@ -7,7 +7,7 @@ import { withObservables } from '@nozbe/watermelondb/react';
 import { Account } from '@/model/Account';
 
 const NewAllocationScreen = ({ accounts }: { accounts: Account[] }) => {
-	const { income, setIncome, createAllocation } = useCreateAllocation();
+	const { income, setIncome, createAllocation } = useCreateAllocation(accounts);
 
 	const handleSave = async () => {
 		await createAllocation();

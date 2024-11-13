@@ -1,15 +1,32 @@
-import { allocationsCollection, db } from '@/db/index.native';
+import {
+	accountAllocationCollection,
+	allocationsCollection,
+	db,
+} from '@/db/index.native';
+import { Account } from '@/model/Account';
 import { useState } from 'react';
 
-const useCreateAllocation = () => {
+const useCreateAllocation = (accounts: Account[]) => {
 	const [income, setIncome] = useState('0');
 
 	const createAllocation = async () => {
 		await db.write(async () => {
-			await allocationsCollection.create((allocation) => {
-				allocation.income = Number.parseFloat(income);
+			const allocation = await allocationsCollection.create((newAllocation) => {
+				newAllocation.income = Number.parseFloat(income);
 			});
+
+			await Promise.all(
+				accounts.map(async (account) => {
+					await accountAllocationCollection.create((item) => {
+						item.account.set(account);
+						item.allocation.set(allocation);
+						item.cap = account.cap;
+						item.amount = (allocation.income * account.cap) / 100;
+					});
+				})
+			);
 		});
+
 		setIncome('0');
 	};
 
