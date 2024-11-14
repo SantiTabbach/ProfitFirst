@@ -16,8 +16,8 @@ const useCreateAllocation = (accounts: Account[]) => {
 			});
 
 			await Promise.all(
-				accounts.map(async (account) => {
-					await accountAllocationCollection.create((item) => {
+				accounts.map((account) => {
+					accountAllocationCollection.create((item) => {
 						item.account.set(account);
 						item.allocation.set(allocation);
 						item.cap = account.cap;
