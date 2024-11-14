@@ -1,9 +1,24 @@
-import { Model } from '@nozbe/watermelondb';
-import { date, readonly, field } from '@nozbe/watermelondb/decorators';
+import { Model, Q, Relation } from '@nozbe/watermelondb';
+import {
+	date,
+	readonly,
+	field,
+	children,
+	lazy,
+} from '@nozbe/watermelondb/decorators';
+import { AccountAllocation } from './AccountAllocation';
+import { Account } from './Account';
 
 export class Allocation extends Model {
 	static table = 'allocations';
 
+	static associations = {
+		account_allocations: { type: 'has_many', foreignKey: 'allocation_id' },
+	};
+
 	@field('income') income!: number;
 	@readonly @date('created_at') createdAt!: Date;
+
+	@children('account_allocations')
+	accountAllocations!: AccountAllocation[];
 }
