@@ -19,6 +19,7 @@ export class AccountAllocation extends Model {
 	};
 
 	@readonly @date('created_at') createdAt!: Date;
+	@readonly @date('updated_at') updatedAt!: Date;
 
 	@field('amount') amount!: number;
 	@field('cap') cap!: number;

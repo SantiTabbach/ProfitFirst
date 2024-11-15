@@ -1,5 +1,12 @@
 import { Collection, Model } from '@nozbe/watermelondb';
-import { field, nochange, text, writer } from '@nozbe/watermelondb/decorators';
+import {
+	date,
+	field,
+	nochange,
+	readonly,
+	text,
+	writer,
+} from '@nozbe/watermelondb/decorators';
 
 export class Account extends Model {
 	static table = 'accounts';
@@ -7,6 +14,8 @@ export class Account extends Model {
 	@text('name') name!: string;
 	@field('cap') cap!: number;
 	@field('tap') tap!: number;
+	@readonly @date('created_at') createdAt!: Date;
+	@readonly @date('updated_at') updatedAt!: Date;
 	@nochange @field('user_id') userId!: string;
 
 	@writer async create(accountData: {
