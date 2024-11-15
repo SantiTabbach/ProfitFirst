@@ -9,6 +9,10 @@ export default appSchema({
 				{ name: 'name', type: 'string' },
 				{ name: 'cap', type: 'number' },
 				{ name: 'tap', type: 'number' },
+				{
+					name: 'user_id',
+					type: 'string',
+				},
 			],
 		}),
 		tableSchema({
@@ -21,6 +25,10 @@ export default appSchema({
 				{
 					name: 'income',
 					type: 'number',
+				},
+				{
+					name: 'user_id',
+					type: 'string',
 				},
 			],
 		}),
@@ -38,6 +46,10 @@ export default appSchema({
 				{ name: 'allocation_id', type: 'string' },
 				{ name: 'amount', type: 'number' },
 				{ name: 'cap', type: 'number' },
+				{
+					name: 'user_id',
+					type: 'string',
+				},
 			],
 		}),
 	],

@@ -5,6 +5,7 @@ import {
 	field,
 	immutableRelation,
 	lazy,
+	nochange,
 } from '@nozbe/watermelondb/decorators';
 import { Account } from './Account';
 import { Allocation } from './Allocation';
@@ -21,6 +22,7 @@ export class AccountAllocation extends Model {
 
 	@field('amount') amount!: number;
 	@field('cap') cap!: number;
+	@nochange @field('user_id') userId!: string;
 
 	@immutableRelation('accounts', 'account_id') account!: Relation<Account>;
 	@immutableRelation('allocations', 'allocation_id')

@@ -5,6 +5,7 @@ import {
 	field,
 	children,
 	lazy,
+	nochange,
 } from '@nozbe/watermelondb/decorators';
 import { AccountAllocation } from './AccountAllocation';
 import { Account } from './Account';
@@ -18,6 +19,7 @@ export class Allocation extends Model {
 
 	@field('income') income!: number;
 	@readonly @date('created_at') createdAt!: Date;
+	@nochange @field('user_id') userId!: string;
 
 	@children('account_allocations')
 	accountAllocations!: AccountAllocation[];

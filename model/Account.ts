@@ -1,5 +1,5 @@
 import { Collection, Model } from '@nozbe/watermelondb';
-import { field, text, writer } from '@nozbe/watermelondb/decorators';
+import { field, nochange, text, writer } from '@nozbe/watermelondb/decorators';
 
 export class Account extends Model {
 	static table = 'accounts';
@@ -7,11 +7,13 @@ export class Account extends Model {
 	@text('name') name!: string;
 	@field('cap') cap!: number;
 	@field('tap') tap!: number;
+	@nochange @field('user_id') userId!: string;
 
 	@writer async create(accountData: {
 		name: string;
 		cap: number;
 		tap: number;
+		userId: string;
 	}) {
 		const accountCollection: Collection<Account> =
 			this.collections.get('accounts');
@@ -19,6 +21,7 @@ export class Account extends Model {
 			account.name = accountData.name;
 			account.cap = accountData.cap;
 			account.tap = accountData.tap;
+			account.userId = accountData.userId;
 		});
 
 		return newAccount;
